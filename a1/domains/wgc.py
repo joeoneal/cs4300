@@ -2,10 +2,10 @@
 ## represented by tuple --> (0, 0, 0, 0) = all on left
 ## (0, 1, 0, 0) --> all on left except goat
 
-class wgc:
+class WGC:
     def __init__(self):
         self.init_state = (0, 0, 0, 0)
-        self.goat_state = (1, 1, 1, 1)
+        self.goal_state = (1, 1, 1, 1)
         
     def nothing_eaten(self, state):  
         w = state[0]
@@ -57,4 +57,4 @@ class wgc:
         return good_boys
             
     def goal_test(self, state):
-        return state == self.init_state
+        return state == self.goal_state
