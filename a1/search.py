@@ -30,14 +30,14 @@ def main():
         if problem.goal_test(node_being_tested.state):
             print(f'Solution found: {node_being_tested.state}')
             return
-        explored.add(node_being_tested)
+        explored.add(node_being_tested.state)
         for action in problem.possibleActions(node_being_tested.state):
             new_state = problem.result(node_being_tested.state, action)
             if new_state not in explored:
                 new_node = Node(new_state, node_being_tested)
                 frontier.append(new_node)
 
-        print("search failed")
-        return
+    print("search failed")
+    return
 
 
