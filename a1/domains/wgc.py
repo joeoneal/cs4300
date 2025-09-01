@@ -61,3 +61,12 @@ class WGC:
             
     def goal_test(self, state):
         return state == self.goal_state
+
+## instance 2, two wolves instead of 1, goat cannot be left alone with either wolf
+class WGC2:
+    def __init__(self):
+        self.init_state = (0, 0, 0, 0, 0)
+        self.goal_state = (1, 1, 1, 1, 1)
+        self.total_nodes = 0
+        self.nodes_expanded = 0
+        self.max_frontier = 0
