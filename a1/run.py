@@ -1,8 +1,10 @@
 from search import bfs
+from domains.wgc import WGC
 import helpers
 
 def main():
-    solution = bfs() ## solution is a tuple --> node is index 0, index 1-3 contain other info
+    problem = WGC()
+    solution = bfs(problem) ## solution is a tuple --> node is index 0, index 1-3 contain other info
     print()
     print("Domain: WGC | Algorithm: BFS")
     print(f'Solution Cost: {solution[0].depth} | Depth: {solution[0].depth}')
@@ -27,9 +29,14 @@ def main():
 
     print()
 
-    # for i in range(solution[0].depth):
-    #     print(f'{i+1})')
-
+    ################
+    #dfs test
+    problem2 = WGC()
+    solution2 = bfs(problem2) ## solution is a tuple --> node is index 0, index 1-3 contain other info
+    print()
+    print("Domain: WGC | Algorithm: BFS")
+    print(f'Solution Cost: {solution2[0].depth} | Depth: {solution2[0].depth}')
+    print(f'Nodes generated: {solution2[1]} | Nodes expanded: {solution2[2]} | Max frontier: {solution2[3]}')
 
 
 

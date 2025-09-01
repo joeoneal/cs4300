@@ -17,9 +17,8 @@ class Node:
     
 #############################################################################
 
-def bfs(): 
+def bfs(problem): 
 
-    problem = WGC()
     start = Node(problem.init_state, None)
     problem.total_nodes += 1
     frontier = deque()
@@ -60,5 +59,38 @@ def bfs():
     return None
 
 ###################################################################################################################
+
+# need dfs function first
+def dfs(problem):
+    start = Node(problem.init_state, None)
+    problem.total_nodes += 1
+    # going to use list as stack, append to add and pop to remove last added item
+    frontier = []
+    frontier.append(start)
+    explored = set()
+    while frontier:
+        node_being_tested = frontier.pop()
+        if problem.goal_test(node_being_tested.state):
+            return (node_being_tested, problem.total_nodes, problem.nodes_expanded, problem.max_frontier)
+        
+        has_child = False
+        explored.add(node_being_tested.state)
+        for action in problem.possibleActions(node_being_tested.state):
+            if not has_child:
+                problem.nodes_expanded += 1
+                has_child = True
+
+            new_state = problem.result(node_being_tested.state, action)
+            if new_state not in explored:
+                new_node = Node(new_state, node_being_tested, action)
+                problem.total_nodes += 1
+
+                frontier.append(new_node)
+                if problem.max_frontier < len(frontier):
+                    problem.max_frontier = len(frontier)
+
+    print("search failed")
+    return None
+
 
 

@@ -63,10 +63,63 @@ class WGC:
         return state == self.goal_state
 
 ## instance 2, two wolves instead of 1, goat cannot be left alone with either wolf
-class WGC2:
-    def __init__(self):
-        self.init_state = (0, 0, 0, 0, 0)
-        self.goal_state = (1, 1, 1, 1, 1)
-        self.total_nodes = 0
-        self.nodes_expanded = 0
-        self.max_frontier = 0
+## satte for this instance --> {w1, w2, g, c, f}
+# class WGC2:
+#     def __init__(self):
+#         self.init_state = (0, 0, 0, 0, 0)
+#         self.goal_state = (1, 1, 1, 1, 1)
+#         self.total_nodes = 0
+#         self.nodes_expanded = 0
+#         self.max_frontier = 0
+
+#     def nothing_eaten(self, state):  
+#         w = state[0]
+#         w2 = state[1]
+#         g = state[2]
+#         c = state[3]
+#         f = state[4]
+
+#         if f == 0:
+#             if g == 1 and w == 1 or g == 1 and w2 == 1 : 
+#                 return False
+#             if g ==1 and c == 1:
+#                 return False
+#         if f == 1:
+#             if g == 0 and w == 0 or g == 0 and w2 == 0:
+#                 return False
+#             if g == 0 and c == 0:
+#                 return False
+        
+#         return True
+    
+#     def result(self, state, action):
+#         next_state = list(state)
+#         bank = 1 - state[4]
+#         for i in action:
+#             next_state[i] = bank
+
+#         return tuple(next_state)
+    
+#     def possibleActions(self, state):
+#         actions = []
+#         f = state[4]
+
+#         ## 0 = with wolf, 1 = with goat, 2 = with cabbage, 3 = alond
+
+#         actions.append((4,))
+
+#         # need to check if the entity is on the same bank as the farmer
+#         for i in range(4):
+#             if state[i] == f:
+#                 actions.append((4, i))
+
+#         # filter out illegal actions
+#         good_boys = []
+#         for action in actions:
+#             if self.nothing_eaten(self.result(state, action)):
+#                 good_boys.append(action)
+
+#         return good_boys
+            
+#     def goal_test(self, state):
+#         return state == self.goal_state
