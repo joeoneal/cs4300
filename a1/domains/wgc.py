@@ -6,6 +6,9 @@ class WGC:
     def __init__(self):
         self.init_state = (0, 0, 0, 0)
         self.goal_state = (1, 1, 1, 1)
+        self.total_nodes = 0
+        self.nodes_expanded = 0
+        self.max_frontier = 0
         
     def nothing_eaten(self, state):  
         w = state[0]
