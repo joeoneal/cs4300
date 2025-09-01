@@ -15,7 +15,7 @@ class Node:
     def __str__(self):
         return f'Node {self.state}'
     
-#############################################################################
+################################################################################################
 
 def bfs(problem): 
 
@@ -60,37 +60,54 @@ def bfs(problem):
 
 ###################################################################################################################
 
-# need dfs function first
-def dfs(problem):
+# need dls function first
+def dls(problem, L):
     start = Node(problem.init_state, None)
-    problem.total_nodes += 1
-    # going to use list as stack, append to add and pop to remove last added item
     frontier = []
     frontier.append(start)
-    explored = set()
+    cutoff = False
+
+    #keep track of stats locally in this one
+    stats = {"total": 1, "expanded": 0, "max_frontier": 1}
+
     while frontier:
         node_being_tested = frontier.pop()
         if problem.goal_test(node_being_tested.state):
-            return (node_being_tested, problem.total_nodes, problem.nodes_expanded, problem.max_frontier)
+            return (node_being_tested, stats["total"], stats["expanded"], stats["max_frontier"])
         
-        has_child = False
-        explored.add(node_being_tested.state)
-        for action in problem.possibleActions(node_being_tested.state):
-            if not has_child:
-                problem.nodes_expanded += 1
-                has_child = True
+        if node_being_tested.depth == L:
+            cutoff = True
+            continue
+        
+        actions = problem.possibleActions(node_being_tested.state)
+        if actions:
+            stats["expanded"] += 1
 
+        for action in reversed(actions):
             new_state = problem.result(node_being_tested.state, action)
-            if new_state not in explored:
-                new_node = Node(new_state, node_being_tested, action)
-                problem.total_nodes += 1
+            new_node = Node(new_state, node_being_tested, action)
+            stats["total"] += 1
+            frontier.append(new_node)
+            if stats["max_frontier"] < len(frontier):
+                stats["max_frontier"] = len(frontier)
 
-                frontier.append(new_node)
-                if problem.max_frontier < len(frontier):
-                    problem.max_frontier = len(frontier)
+    if cutoff:
+        return "cutoff"
+    else:
+        return "failure"
 
-    print("search failed")
+
+#####################################################################################################################################
+
+def ids(problem, L):
+    #call dfs until set limit L
+    for limit in range(L):
+        start_node = Node(problem.init_state)
+        result = dls(problem, L)
+
+        if result is not "cutoff":
+            return result
+        
     return None
-
 
 

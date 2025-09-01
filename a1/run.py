@@ -1,4 +1,4 @@
-from search import bfs
+from search import bfs, ids
 from domains.wgc import WGC
 import helpers
 
@@ -30,11 +30,11 @@ def main():
     print()
 
     ################
-    #dfs test
+    #dls test
     problem2 = WGC()
-    solution2 = bfs(problem2) ## solution is a tuple --> node is index 0, index 1-3 contain other info
+    solution2 = ids(problem2, 10) ## solution is a tuple --> node is index 0, index 1-3 contain other info
     print()
-    print("Domain: WGC | Algorithm: BFS")
+    print("Domain: WGC | Algorithm: IDS")
     print(f'Solution Cost: {solution2[0].depth} | Depth: {solution2[0].depth}')
     print(f'Nodes generated: {solution2[1]} | Nodes expanded: {solution2[2]} | Max frontier: {solution2[3]}')
 
