@@ -103,7 +103,7 @@ def ids(problem, L):
     #call dfs until set limit L
     for limit in range(L):
         start_node = Node(problem.init_state)
-        result = dls(problem, L)
+        result = dls(problem, limit)
 
         if result is not "cutoff":
             return result

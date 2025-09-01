@@ -38,6 +38,24 @@ def main():
     print(f'Solution Cost: {solution2[0].depth} | Depth: {solution2[0].depth}')
     print(f'Nodes generated: {solution2[1]} | Nodes expanded: {solution2[2]} | Max frontier: {solution2[3]}')
 
+    path2 = helpers.find_path(solution[0])
+
+    print()
+
+    print("State key: [Wolf, Goat, Cabbage, Farmer]")
+    print()
+    print("Path:")
+
+    for i in range(len(path2) - 1):
+        n3 = path2[i]
+        n4 = path2[i+1]
+        counter = i+1
+
+        action2 = helpers.format(n4.action).ljust(12)
+
+        print(f'{counter}) {action2} {n3.state} --> {n4.state}')
+
+
 
 
 if __name__ == "__main__":
