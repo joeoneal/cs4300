@@ -3,13 +3,14 @@ from domains.wgc import WGC
 ## need node class to track state, pointer to parent, action, path cost, and depth
 class Node:
 
-    def __init__(self, state, parent=None):
+    def __init__(self, state, parent=None, action = None):
         self.state = state
         self.parent = parent
         self.depth = 0
         if parent:
             self.depth = parent.depth + 1
         self.total = 1
+        self.action = action
 
     def __str__(self):
         return f'Node {self.state}'
@@ -25,17 +26,17 @@ def bfs():
     frontier.append(start)
     explored = set()
     
-    print(f'First node in the queue is {start}.')
-    print(f'goal state is {problem.goal_state}')
+    # print(f'First node in the queue is {start}.')
+    # print(f'goal state is {problem.goal_state}')
 
     while frontier:
         # print(f"frontier length is {len(frontier)}")
         node_being_tested = frontier.popleft()
-        print(f'goal testing {node_being_tested}...')
+        # print(f'goal testing {node_being_tested}...')
 
         if problem.goal_test(node_being_tested.state):
-            print(f'Solution found: {node_being_tested.state}')
-            print(f'steps taken: {node_being_tested.depth}')
+            # print(f'Solution found: {node_being_tested.state}')
+            # print(f'steps taken: {node_being_tested.depth}')
             return (node_being_tested, problem.total_nodes, problem.nodes_expanded, problem.max_frontier)
         
         # need flag to check for child nodes
@@ -48,7 +49,7 @@ def bfs():
 
             new_state = problem.result(node_being_tested.state, action)
             if new_state not in explored:
-                new_node = Node(new_state, node_being_tested)
+                new_node = Node(new_state, node_being_tested, action)
                 problem.total_nodes += 1
 
                 frontier.append(new_node)
