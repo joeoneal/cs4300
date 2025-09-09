@@ -26,7 +26,7 @@ class Problem:
         self.total_nodes = 0
         self.nodes_expanded = 0
         self.max_frontier = 0
-        self.depth = 0
+  
 
     def Actions(self, state):
         index_zero = state.index(0)
@@ -40,29 +40,37 @@ class Problem:
             valid.append('s')
         if column > 0:
             valid.append('w')
-        if column < 0: 
+        if column < 2: 
             valid.append('e')
 
         return valid
     
     def Transition(self, state, action):
+        
+        lst_state = list(state)
         i0 = state.index(0)
         
         if action == 'n':
-            temp = state[i0 - 3]
-            state[i0-3] = 0
-            state[i0] = temp
+            temp = lst_state[i0 - 3]
+            lst_state[i0-3] = 0
+            lst_state[i0] = temp
         if action == 's':
-            temp = state[i0 + 3]
-            state[i0 + 3] = 0
-            state[i0] = temp
+            temp = lst_state[i0 + 3]
+            lst_state[i0 + 3] = 0
+            lst_state[i0] = temp
         if action == 'e':
-            temp = state[i0 + 1]
-            state[i0 + 1] = 0
-            state[i0] = temp
+            temp = lst_state[i0 + 1]
+            lst_state[i0 + 1] = 0
+            lst_state[i0] = temp
         if action == 'w':
-            temp = state[i0 + 1]
-            state[i0 + 1] = 0
-            state[i0] = temp
+            temp = lst_state[i0 - 1]
+            lst_state[i0 - 1] = 0
+            lst_state[i0] = temp
         
-        return state
+        return lst_state
+    
+    def GoalTest(self, state):
+        return state == self.goal_state
+    
+    def heuristic0(self, state):
+        return 0
