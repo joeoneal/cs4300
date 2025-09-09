@@ -72,7 +72,7 @@ class Problem:
     def GoalTest(self, state):
         return list(state) == self.goal_state
     
-    def heuristic0(self, state):
+    def heuristic0(self, state, problem):
         return 0
     
     def heuristic1(self, state, problem):
@@ -82,8 +82,21 @@ class Problem:
                 count += 1
         return count
     
-    # def heuristic2(self, state, problem):
-    #     #based on simplification from class, how far from correct spot if there were no other tiles in the way
-    #     count = 0
-    #     for i in range(9):
-    #         if state[i] != 0 and sta
+    def heuristic2(self, state, problem):
+        #based on simplification from class, how far from correct spot if there were no other tiles in the way
+        count = 0
+
+        for i in range(9):
+            tile = state[i]
+            if tile != 0:
+                row = i // 3
+                column = i % 3
+
+                goal_i = problem.goal_state.index(tile)
+                goal_row = goal_i // 3
+                goal_column = goal_i % 3
+
+                distance = abs(row - goal_row) + abs(column - goal_column)
+                count += distance
+        
+        return count

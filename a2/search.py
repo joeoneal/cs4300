@@ -2,7 +2,7 @@ from domains.problem import Problem
 from node import Node
 import heapq
 
-def aStar(problem):
+def aStar(problem, heuristic):
     startNode = Node(problem.init_state, None)
     problem.total_nodes += 1
     
@@ -11,9 +11,8 @@ def aStar(problem):
     frontier = []
     id = 0
 
-    ## plug in whatever heuristic is being used here and below, comment out others
-    # h_cost = problem.heuristic0(startNode.state)
-    h_cost = problem.heuristic1(startNode.state, problem)
+    # going to run through the search 3 times, once for each h func
+    h_cost = heuristic(startNode.state, problem)
     f_cost = h_cost
     ## gonna add tuples to the frontier (f_cost, node)
     heapq.heappush(frontier, (f_cost, id, startNode))
@@ -47,9 +46,8 @@ def aStar(problem):
                 new_node = Node(new_state, node_being_tested, action)
                 problem.total_nodes += 1
 
-                ## plug heuristic here when changed
-                # new_h = problem.heuristic0(startNode.state)
-                new_h = problem.heuristic1(node_being_tested.state, problem)
+                new_h = heuristic(new_node.state, problem)
+
                 new_f = new_g + new_h
 
                 id += 1
