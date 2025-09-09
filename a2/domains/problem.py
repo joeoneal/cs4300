@@ -78,6 +78,12 @@ class Problem:
     def heuristic1(self, state, problem):
         count = 0
         for i in range(9):
-            if state[i] != 0 and state[1] != problem.goal_state[i]:
+            if state[i] != 0 and state[i] != problem.goal_state[i]:
                 count += 1
         return count
+    
+    # def heuristic2(self, state, problem):
+    #     #based on simplification from class, how far from correct spot if there were no other tiles in the way
+    #     count = 0
+    #     for i in range(9):
+    #         if state[i] != 0 and sta
