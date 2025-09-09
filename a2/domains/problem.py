@@ -14,7 +14,7 @@ def createStart():
                     count +=1
 
         if count % 2 == 0:
-            print(count)
+            # print(count)
             return start
 
 class Problem:
@@ -70,7 +70,7 @@ class Problem:
         return lst_state
     
     def GoalTest(self, state):
-        return state == self.goal_state
+        return list(state) == self.goal_state
     
     def heuristic0(self, state):
         return 0
