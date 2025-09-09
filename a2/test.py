@@ -17,6 +17,8 @@ def createStart():
             print(count)
             return start
 
+count = 0
+for i in range(30):
+    count += 1
 
-
-createStart()
+print(count)

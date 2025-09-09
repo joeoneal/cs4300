@@ -74,3 +74,10 @@ class Problem:
     
     def heuristic0(self, state):
         return 0
+    
+    def heuristic1(self, state, problem):
+        count = 0
+        for i in range(9):
+            if state[i] != 0 and state[1] != problem.goal_state[i]:
+                count += 1
+        return count

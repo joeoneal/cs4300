@@ -11,8 +11,9 @@ def aStar(problem):
     frontier = []
     id = 0
 
-    ## plug in whatever heuristic is being used here and below
-    h_cost = problem.heuristic0(startNode.state)
+    ## plug in whatever heuristic is being used here and below, comment out others
+    # h_cost = problem.heuristic0(startNode.state)
+    h_cost = problem.heuristic1(startNode.state, problem)
     f_cost = h_cost
     ## gonna add tuples to the frontier (f_cost, node)
     heapq.heappush(frontier, (f_cost, id, startNode))
@@ -47,7 +48,8 @@ def aStar(problem):
                 problem.total_nodes += 1
 
                 ## plug heuristic here when changed
-                new_h = problem.heuristic0(node_being_tested.state)
+                # new_h = problem.heuristic0(startNode.state)
+                new_h = problem.heuristic1(node_being_tested.state, problem)
                 new_f = new_g + new_h
 
                 id += 1
