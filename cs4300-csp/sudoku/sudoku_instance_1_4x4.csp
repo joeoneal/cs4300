@@ -1,0 +1,45 @@
+NAME: 4x4 SUDOKU (unique digits, alldiff-based)
+DESC: A 4x4 Sudoku puzzle solved with alldiff constraints.
+
+VARS:
+  # The domain for empty cells is [1,2,3,4], for filled in cells is one digit
+
+  Va1: [1,2,3,4]
+  Vb1: [1,2,3,4]
+  Vc1: [1,2,3,4]
+  Vd1: [3]
+
+  Va2: [1,2,3,4]
+  Vb2: [4]
+  Vc2: [1,2,3,4]
+  Vd2: [1,2,3,4]
+
+  Va3: [1]
+  Vb3: [1,2,3,4]
+  Vc3: [1,2,3,4]
+  Vd3: [4]
+
+  Va4: [1,2,3,4]
+  Vb4: [1,2,3,4]
+  Vc4: [3]
+  Vd4: [1,2,3,4]
+
+CONS:
+
+  # Row Constraints
+  alldiff(Va1, Vb1, Vc1, Vd1)
+  alldiff(Va2, Vb2, Vc2, Vd2)
+  alldiff(Va3, Vb3, Vc3, Vd3)
+  alldiff(Va4, Vb4, Vc4, Vd4)
+
+  # Column Constraints
+  alldiff(Va1, Va2, Va3, Va4)
+  alldiff(Vb1, Vb2, Vb3, Vb4)
+  alldiff(Vc1, Vc2, Vc3, Vc4)
+  alldiff(Vd1, Vd2, Vd3, Vd4)
+
+  # 2x2 Box Constraints
+  alldiff(Va1, Vb1, Va2, Vb2)
+  alldiff(Vc1, Vd1, Vc2, Vd2)
+  alldiff(Va3, Vb3, Va4, Vb4)
+  alldiff(Vc3, Vd3, Vc4, Vd4)

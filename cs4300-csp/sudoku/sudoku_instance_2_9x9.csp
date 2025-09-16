@@ -1,0 +1,157 @@
+NAME: 9x9 SUDOKU (unique digits, alldiff-based)
+DESC: A 9x9 Sudoku puzzle solved with alldiff constraints.
+
+VARS:
+  # The domain for empty cells is [1, 2, 3, 4, 5, 6, 7, 8, 9], for filled in cells is one digit
+
+  # ROW 1
+  Va1: [1,2,3,4,5,6,7,8,9]
+  Vb1: [1,2,3,4,5,6,7,8,9]
+  Vc1: [1,2,3,4,5,6,7,8,9]
+
+  Vd1: [5]
+  Ve1: [4]
+  Vf1: [2]
+
+  Vg1: [1,2,3,4,5,6,7,8,9]
+  Vh1: [1,2,3,4,5,6,7,8,9]
+  Vi1: [1,2,3,4,5,6,7,8,9]
+
+  # ROW 2
+  Va2: [2]
+  Vb2: [7]
+  Vc2: [1,2,3,4,5,6,7,8,9]
+
+  Vd2: [8]
+  Ve2: [1,2,3,4,5,6,7,8,9]
+  Vf2: [1]
+
+  Vg2: [1,2,3,4,5,6,7,8,9]
+  Vh2: [6]
+  Vi2: [4]
+
+  # ROW 3
+  Va3: [5]
+  Vb3: [1,2,3,4,5,6,7,8,9]
+  Vc3: [1,2,3,4,5,6,7,8,9]
+
+  Vd3: [1,2,3,4,5,6,7,8,9]
+  Ve3: [7]
+  Vf3: [1,2,3,4,5,6,7,8,9]
+
+  Vg3: [1,2,3,4,5,6,7,8,9]
+  Vh3: [1,2,3,4,5,6,7,8,9]
+  Vi3: [8]
+
+  # ROW 4
+  Va4: [1,2,3,4,5,6,7,8,9]
+  Vb4: [4]
+  Vc4: [1,2,3,4,5,6,7,8,9]
+
+  Vd4: [1,2,3,4,5,6,7,8,9]
+  Ve4: [1,2,3,4,5,6,7,8,9]
+  Vf4: [1,2,3,4,5,6,7,8,9]
+
+  Vg4: [1,2,3,4,5,6,7,8,9]
+  Vh4: [5]
+  Vi4: [1,2,3,4,5,6,7,8,9]
+
+  # ROW 5
+  Va5: [3]
+  Vb5: [1,2,3,4,5,6,7,8,9]
+  Vc5: [1,2,3,4,5,6,7,8,9]
+
+  Vd5: [1,2,3,4,5,6,7,8,9]
+  Ve5: [1,2,3,4,5,6,7,8,9]
+  Vf5: [1,2,3,4,5,6,7,8,9]
+
+  Vg5: [1,2,3,4,5,6,7,8,9]
+  Vh5: [1,2,3,4,5,6,7,8,9]
+  Vi5: [1]
+
+  # ROW 6
+  Va6: [1,2,3,4,5,6,7,8,9]
+  Vb6: [2]
+  Vc6: [1,2,3,4,5,6,7,8,9]
+
+  Vd6: [1,2,3,4,5,6,7,8,9]
+  Ve6: [1,2,3,4,5,6,7,8,9]
+  Vf6: [1,2,3,4,5,6,7,8,9]
+
+  Vg6: [1,2,3,4,5,6,7,8,9]
+  Vh6: [8]
+  Vi6: [1,2,3,4,5,6,7,8,9]
+
+  # ROW 7
+  Va7: [1]
+  Vb7: [1,2,3,4,5,6,7,8,9]
+  Vc7: [1,2,3,4,5,6,7,8,9]
+
+  Vd7: [1,2,3,4,5,6,7,8,9]
+  Ve7: [2]
+  Vf7: [1,2,3,4,5,6,7,8,9]
+
+  Vg7: [1,2,3,4,5,6,7,8,9]
+  Vh7: [1,2,3,4,5,6,7,8,9]
+  Vi7: [3]
+
+  # ROW 8
+  Va8: [9]
+  Vb8: [8]
+  Vc8: [1,2,3,4,5,6,7,8,9]
+
+  Vd8: [1]
+  Ve8: [1,2,3,4,5,6,7,8,9]
+  Vf8: [3]
+
+  Vg8: [1,2,3,4,5,6,7,8,9]
+  Vh8: [2]
+  Vi8: [6]
+
+  # ROW 9
+  Va9: [1,2,3,4,5,6,7,8,9]
+  Vb9: [1,2,3,4,5,6,7,8,9]
+  Vc9: [1,2,3,4,5,6,7,8,9]
+
+  Vd9: [7]
+  Ve9: [9]
+  Vf9: [6]
+
+  Vg9: [1,2,3,4,5,6,7,8,9]
+  Vh9: [1,2,3,4,5,6,7,8,9]
+  Vi9: [1,2,3,4,5,6,7,8,9]
+
+CONS:
+
+  # Row constraints
+  alldiff(Va1, Vb1, Vc1, Vd1, Ve1, Vf1, Vg1, Vh1, Vi1)
+  alldiff(Va2, Vb2, Vc2, Vd2, Ve2, Vf2, Vg2, Vh2, Vi2)
+  alldiff(Va3, Vb3, Vc3, Vd3, Ve3, Vf3, Vg3, Vh3, Vi3)
+  alldiff(Va4, Vb4, Vc4, Vd4, Ve4, Vf4, Vg4, Vh4, Vi4)
+  alldiff(Va5, Vb5, Vc5, Vd5, Ve5, Vf5, Vg5, Vh5, Vi5)
+  alldiff(Va6, Vb6, Vc6, Vd6, Ve6, Vf6, Vg6, Vh6, Vi6)
+  alldiff(Va7, Vb7, Vc7, Vd7, Ve7, Vf7, Vg7, Vh7, Vi7)
+  alldiff(Va8, Vb8, Vc8, Vd8, Ve8, Vf8, Vg8, Vh8, Vi8)
+  alldiff(Va9, Vb9, Vc9, Vd9, Ve9, Vf9, Vg9, Vh9, Vi9)
+
+  # Column constraints
+  alldiff(Va1, Va2, Va3, Va4, Va5, Va6, Va7, Va8, Va9)
+  alldiff(Vb1, Vb2, Vb3, Vb4, Vb5, Vb6, Vb7, Vb8, Vb9)
+  alldiff(Vc1, Vc2, Vc3, Vc4, Vc5, Vc6, Vc7, Vc8, Vc9)
+  alldiff(Vd1, Vd2, Vd3, Vd4, Vd5, Vd6, Vd7, Vd8, Vd9)
+  alldiff(Ve1, Ve2, Ve3, Ve4, Ve5, Ve6, Ve7, Ve8, Ve9)
+  alldiff(Vf1, Vf2, Vf3, Vf4, Vf5, Vf6, Vf7, Vf8, Vf9)
+  alldiff(Vg1, Vg2, Vg3, Vg4, Vg5, Vg6, Vg7, Vg8, Vg9)
+  alldiff(Vh1, Vh2, Vh3, Vh4, Vh5, Vh6, Vh7, Vh8, Vh9)
+  alldiff(Vi1, Vi2, Vi3, Vi4, Vi5, Vi6, Vi7, Vi8, Vi9)
+
+  # 3x3 box constraints
+  alldiff(Va1, Vb1, Vc1, Va2, Vb2, Vc2, Va3, Vb3, Vc3) # top left
+  alldiff(Vd1, Ve1, Vf1, Vd2, Ve2, Vf2, Vd3, Ve3, Vf3) # top middle
+  alldiff(Vg1, Vh1, Vi1, Vg2, Vh2, Vi2, Vg3, Vh3, Vi3) # top right
+  alldiff(Va4, Vb4, Vc4, Va5, Vb5, Vc5, Va6, Vb6, Vc6) # middle left
+  alldiff(Vd4, Ve4, Vf4, Vd5, Ve5, Vf5, Vd6, Ve6, Vf6) # middle middle (center)
+  alldiff(Vg4, Vh4, Vi4, Vg5, Vh5, Vi5, Vg6, Vh6, Vi6) # middle right
+  alldiff(Va7, Vb7, Vc7, Va8, Vb8, Vc8, Va9, Vb9, Vc9) # bottom left
+  alldiff(Vd7, Ve7, Vf7, Vd8, Ve8, Vf8, Vd9, Ve9, Vf9) # bottom middle
+  alldiff(Vg7, Vh7, Vi7, Vg8, Vh8, Vi8, Vg9, Vh9, Vi9) # bottom rigt
