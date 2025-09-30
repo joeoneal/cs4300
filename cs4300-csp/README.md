@@ -40,3 +40,8 @@ Students can:
 1) Write a problem spec in ⟨X,D,C⟩ **and** in CS4300-CSP v1.
 2) Implement or extend the solver (e.g., MRV/LCV/AC-3).
 3) Provide multiple `.csp` instances and report runtime/branching behavior.
+
+
+
+NEW INSTRUCTIONS
+python run_csp.py sudoku/sudoku_instance_3_9x9_hard.csp

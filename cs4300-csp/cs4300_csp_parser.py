@@ -1,7 +1,7 @@
 from __future__ import annotations
 import re, ast
 from typing import Dict, List, Tuple
-from base_csp import CSP, c_alldiff, c_bin, c_in, c_sum, c_table, c_add10
+from mrv_csp import CSP, c_alldiff, c_bin, c_in, c_sum, c_table, c_add10
 
 BINOPS = {
     "eq":  ("==", lambda x,y: x == y),

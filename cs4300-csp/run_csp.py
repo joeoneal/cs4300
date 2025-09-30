@@ -1,5 +1,5 @@
 from cs4300_csp_parser import parse_cs4300
-from base_csp import solve_backtracking
+from mrv_csp import solve_backtracking
 
 if __name__ == "__main__":
     import sys
