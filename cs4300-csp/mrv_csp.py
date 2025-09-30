@@ -68,10 +68,30 @@ def c_add10(x: str, y: str, cin: str, z: str, cout: str) -> Constraint:
         return True
     return Constraint(scope, pred, f"add10({x},{y},{cin}->{z},{cout})")
 
+############################# MRV heuristic #########################################################################
+
+
+def mrv(csp, assignment, current_domains):
+    best_var = None
+    min_domain_size = float('inf')
+
+    for var in csp.domains:
+        if var not in assignment:
+            domain_size = len(current_domains[var])
+            
+            if domain_size < min_domain_size:
+                min_domain_size = domain_size
+                best_var = var
+                
+    return best_var
+
+
+#####################################################################################################################
+
 # ---------- Simple solver (BT + forward checking) ----------
-def solve_backtracking(csp: CSP, var_order: Optional[List[str]]=None) -> Iterable[Assignment]:
+def solve_backtracking(csp: CSP, stats: Dict[str, int]) -> Iterable[Assignment]:
+    stats["steps"] = 0
     domains = {v: list(ds) for v, ds in csp.domains.items()}
-    order = var_order or list(domains.keys())
     cons_by_var: Dict[str, List[Constraint]] = {v: [] for v in domains}
     for c in csp.constraints:
         for v in c.scope:
@@ -85,36 +105,50 @@ def solve_backtracking(csp: CSP, var_order: Optional[List[str]]=None) -> Iterabl
             if not c.pred(a):
                 return False
         return True
-
-    def backtrack(idx: int):
-        if idx == len(order):
+    
+    def backtrack():
+        if len(assignment) == len(csp.domains):
             yield dict(assignment)
             return
-        v = order[idx]
-        for val in domains[v]:
+
+        v = mrv(csp, assignment, domains)
+
+        for val in list(domains[v]):
             assignment[v] = val
+            stats["steps"] += 1
+            
             if consistent_with_local(v, assignment):
-                # forward check
                 pruned = []
                 ok = True
-                for w in order[idx+1:]:
+
+                unassigned_vars = [var for var in csp.domains if var not in assignment]
+                
+                for w in unassigned_vars:
                     removed = []
+
                     for vv in list(domains[w]):
                         assignment[w] = vv
                         if not consistent_with_local(w, assignment):
-                            domains[w].remove(vv); removed.append(vv)
+                            domains[w].remove(vv)
+                            removed.append(vv)
                         del assignment[w]
+                    
                     if removed:
                         pruned.append((w, removed))
+                    
                     if not domains[w]:
-                        ok = False; break
+                        ok = False
+                        break
+                
                 if ok:
-                    yield from backtrack(idx+1)
-                # undo pruning
+                    yield from backtrack()
+                
                 for w, removed in pruned:
                     domains[w].extend(removed)
+            
             del assignment[v]
 
-    yield from backtrack(0)
+    yield from backtrack()
+
 
 
